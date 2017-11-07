@@ -1,0 +1,21 @@
+<div *ngIf="game.state == 0 || game.state == 1">
+<h4>Step for player: {{playerType[game.stepBy]}}</h4>
+<table style="width:100%" border="1">
+    <tr *ngFor="let r of sheetItems">
+        <td *ngFor="let c of sheetItems" [attr.data-r]="r" [attr.data-c]="c" (click)="stepInGame($event)">
+            <p></p>
+        </td>
+    </tr>
+</table>
+</div>
+<div *ngIf="game.state == gameState.Finished">
+    <h4>
+        {{game.result}}
+    </h4>
+    <div>
+        <button (click)="setNewGame()">New game</button>
+    </div>
+    <div>
+        <a href="/fetch-data">View games history</a>
+    </div>
+</div>
