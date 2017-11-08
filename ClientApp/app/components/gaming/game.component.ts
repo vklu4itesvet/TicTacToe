@@ -32,14 +32,12 @@ export class GameComponent {
     stepInGame(e: any) {
         let cell = e.target;
         let step = cell.parentElement.dataset;
-        this.game.makeStep(step.c * 1, step.r * 1);
         cell.textContent = PlayerType[this.game.stepBy];
+        this.game.makeStep(step.c * 1, step.r * 1);
     }
 
     gameOver(result: string) {
         this.sheetItems = [];
-        this.setNewGame();
-
         //TODO: pass result and time stamp to the history service
     }
 }
