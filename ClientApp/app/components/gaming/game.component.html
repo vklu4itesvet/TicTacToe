@@ -3,7 +3,7 @@
 <table style="width:100%" border="1">
     <tr *ngFor="let r of sheetItems">
         <td *ngFor="let c of sheetItems" [attr.data-r]="r" [attr.data-c]="c" (click)="stepInGame($event)">
-            <p></p>
+            <div class="cell">&nbsp;</div>
         </td>
     </tr>
 </table>

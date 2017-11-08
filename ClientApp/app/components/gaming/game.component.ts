@@ -4,7 +4,8 @@ import { PlayerType, GameState, GameResult } from '../../domain/game.data';
 
 @Component({
     selector: 'home',
-    templateUrl: './game.component.html'
+    templateUrl: './game.component.html',
+    styleUrls: ['../../../css/game.component.css']
 })
 export class GameComponent {
 
@@ -30,9 +31,9 @@ export class GameComponent {
 
     stepInGame(e: any) {
         let cell = e.target;
-        cell.appendChild(document.createTextNode(PlayerType[this.game.stepBy])); 
-
-        this.game.makeStep(cell.dataset.c*1, cell.dataset.r*1);
+        let step = cell.parentElement.dataset;
+        this.game.makeStep(step.c * 1, step.r * 1);
+        cell.textContent = PlayerType[this.game.stepBy];
     }
 
     gameOver(result: string) {
