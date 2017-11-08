@@ -13,13 +13,29 @@ export class GameComponent {
 
     gameState = GameState;
 
-    game: Game;
+    game = new Game();
 
     sheetItems: number[] = [1, 2, 3];
 
-    gameResultsMap: any = { 'Xwin': 'X win!', 'Draw': 'Draw!', 'Owin': 'O win!' };
+    constructor(private _cdRef: ChangeDetectorRef) { }
 
-    constructor(private _cdRef: ChangeDetectorRef) {}
+    get gameResultsMap(): any {
+        return { 'Xwin': `${this.playerXname} win!`, 'Draw': 'Draw!', 'Owin': `${this.playerOname} win!` };
+    }
+
+    get playerXname(): string {
+        return this.game.playerXname;
+    }
+    set playerXname(thePlayerXname: string) {
+        this.game.playerXname = thePlayerXname;
+    }
+
+    get playerOname(): string {
+        return this.game.playerOname;
+    }
+    set playerOname(thePlayerOname: string) {
+        this.game.playerOname = thePlayerOname;
+    }
 
     ngOnInit() {
         this.initializeGame();

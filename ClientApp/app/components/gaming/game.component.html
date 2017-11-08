@@ -1,3 +1,7 @@
+<div>
+    Name of player who steps by X: <input type="text" [(ngModel)] = "playerXname" >&nbsp;&nbsp;
+    Name of player who steps by O: <input type="text" [(ngModel)] = "playerOname" />
+</div>
 <div *ngIf="game.state == gameState.Upcoming || game.state == gameState.InPlay">
     <h4>Step for player: {{playerType[game.stepBy]}}</h4>
 </div>

@@ -3,6 +3,10 @@
 export class Game {
     static readonly sheetSize = 3;
 
+    playerXname = PlayerType[PlayerType.X];
+
+    playerOname = PlayerType[PlayerType.O];
+
     stepBy = PlayerType.X;
 
     result?: string;
