@@ -12,9 +12,9 @@ export enum PlayerType {
 }
 
 export enum GameResult {
-    X_win = -1,
+    Xwin = -1,
     Draw = 0,
-    O_win = 1
+    Owin = 1
 }
 
 export enum GameState {

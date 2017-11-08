@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Game} from '../../domain/game';
-import { PlayerType, GameState } from '../../domain/game.data';
+import { Game } from '../../domain/game';
+import { PlayerType, GameState, GameResult } from '../../domain/game.data';
 
 @Component({
     selector: 'home',
@@ -15,6 +15,8 @@ export class GameComponent {
     game: Game;
 
     sheetItems: number[];
+
+    gameResultsMap: any = { 'Xwin': 'X win!', 'Draw': 'Draw!', 'Owin': 'O win!' };
 
     ngOnInit() {
         this.setNewGame();
