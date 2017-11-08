@@ -1,5 +1,9 @@
 <div *ngIf="game.state == gameState.Upcoming || game.state == gameState.InPlay">
-<h4>Step for player: {{playerType[game.stepBy]}}</h4>
+    <h4>Step for player: {{playerType[game.stepBy]}}</h4>
+</div>
+<div *ngIf="game.state == gameState.Finished">
+    <h4>{{game.result | i18nSelect:gameResultsMap}}</h4>
+</div>
 <table style="width:100%" border="1">
     <tr *ngFor="let r of sheetItems">
         <td *ngFor="let c of sheetItems" [attr.data-r]="r" [attr.data-c]="c" (click)="stepInGame($event)">
@@ -7,14 +11,10 @@
         </td>
     </tr>
 </table>
+<div>
+    <button (click)="setNewGame()">New game</button>
 </div>
 <div *ngIf="game.state == gameState.Finished">
-    <h4>
-        {{game.result | i18nSelect:gameResultsMap}}
-    </h4>
-    <div>
-        <button (click)="setNewGame()">New game</button>
-    </div>
     <div>
         <a href="/fetch-data">View games history</a>
     </div>

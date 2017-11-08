@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Game } from '../../domain/game';
 import { PlayerType, GameState, GameResult } from '../../domain/game.data';
 
@@ -15,18 +15,19 @@ export class GameComponent {
 
     game: Game;
 
-    sheetItems: number[];
+    sheetItems: number[] = [1, 2, 3];
 
     gameResultsMap: any = { 'Xwin': 'X win!', 'Draw': 'Draw!', 'Owin': 'O win!' };
 
+    constructor(private _cdRef: ChangeDetectorRef) {}
+
     ngOnInit() {
-        this.setNewGame();
+        this.initializeGame();
     }
 
     setNewGame() {
-        this.sheetItems = [1,2,3]
-        this.game = new Game();
-        this.game.onGameOver = this.gameOver;
+        this.resetGameSheet();
+        this.initializeGame();
     }
 
     stepInGame(e: any) {
@@ -37,7 +38,18 @@ export class GameComponent {
     }
 
     gameOver(result: string) {
-        this.sheetItems = [];
         //TODO: pass result and time stamp to the history service
+    }
+
+    initializeGame() {
+        this.game = new Game();
+        this.game.onGameOver = this.gameOver;
+    }
+
+    resetGameSheet() {
+        let cells = document.querySelectorAll('.cell');
+        for (let i = 0; i < cells.length; ++i) {
+            cells[i].textContent = ' ';
+        }
     }
 }
