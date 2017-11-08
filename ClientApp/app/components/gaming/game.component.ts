@@ -32,10 +32,11 @@ export class GameComponent {
 
     stepInGame(e: any) {
         let cell = e.target;
+        let stepPosition = cell.parentElement.dataset;
+        let stepBy = this.game.stepBy;
 
-        if (this.tryDysplayStep(cell, this.game)) {
-            let step = cell.parentElement.dataset;
-            this.game.makeStep(step.c * 1, step.r * 1);
+        if (this.game.tryMakeStep(stepPosition.c * 1, stepPosition.r * 1)) {
+            cell.textContent = PlayerType[stepBy];
         } 
     }
 
@@ -53,19 +54,5 @@ export class GameComponent {
         for (let i = 0; i < cells.length; ++i) {
             cells[i].textContent = '\xa0';
         }
-    }
-
-    tryDysplayStep(cell: any, game: Game) {
-        if (game.state == GameState.Finished) {
-            return false;
-        }
-
-        //checking if cell is not fullfiled yet
-        if (cell.textContent !== '\xa0') {
-            return false;
-        }
-
-        cell.textContent = PlayerType[game.stepBy];
-        return true;
     }
 }

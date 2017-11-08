@@ -15,7 +15,11 @@ export class Game {
 
     onGameOver: (result: string) => void
 
-    makeStep(r: number, c: number) {
+    tryMakeStep(r: number, c: number) {
+        if (!this.stepIsAllowed(r, c)) {
+            return false;
+        }
+
         this.state = GameState.InPlay;
 
         let stepInto = this.stepBy == PlayerType.X ? this.xSteps : this.oSteps;
@@ -30,6 +34,19 @@ export class Game {
         else {
             this.stepBy = this.stepBy * (-1);//switching current player
         }
+
+        return true;
+    }
+
+    stepIsAllowed(r: number, c: number) {
+        if (this.state === GameState.Finished) {
+            return false;
+        }
+
+        let suchXisEmpty = !this.xSteps.some(s => s.r == r && s.c == c);
+        let suchOisEmpty = !this.oSteps.some(s => s.r == r && s.c == c);
+
+        return suchXisEmpty && suchOisEmpty;
     }
 
     checkIsOver(bySteps: Array<GameStep>) {
