@@ -32,9 +32,8 @@ export class GameComponent {
 
     stepInGame(e: any) {
         let cell = e.target;
-        let stepBy = PlayerType[this.game.stepBy];
 
-        if (this.tryDysplayStep(cell, stepBy)) {
+        if (this.tryDysplayStep(cell, this.game)) {
             let step = cell.parentElement.dataset;
             this.game.makeStep(step.c * 1, step.r * 1);
         } 
@@ -52,17 +51,21 @@ export class GameComponent {
     resetGameSheet() {
         let cells = document.querySelectorAll('.cell');
         for (let i = 0; i < cells.length; ++i) {
-            cells[i].textContent = ' ';
+            cells[i].textContent = '\xa0';
         }
     }
 
-    tryDysplayStep(cell: any, step: string) {
-        //checking if cell is not fullfiled yet
-        if (cell.textContent === '\xa0') {
-            cell.textContent = step;
-            return true;
+    tryDysplayStep(cell: any, game: Game) {
+        if (game.state == GameState.Finished) {
+            return false;
         }
 
-        return false;
+        //checking if cell is not fullfiled yet
+        if (cell.textContent !== '\xa0') {
+            return false;
+        }
+
+        cell.textContent = PlayerType[game.stepBy];
+        return true;
     }
 }
