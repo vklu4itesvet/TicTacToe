@@ -27,7 +27,9 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\domain\game.data.ts" />
+    <TypeScriptCompile Include="ClientApp\app\domain\game.history.ts" />
     <TypeScriptCompile Include="ClientApp\app\domain\game.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\games.history.service.ts" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
