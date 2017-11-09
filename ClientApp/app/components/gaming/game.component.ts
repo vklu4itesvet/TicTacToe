@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Game } from '../../domain/game';
 import { PlayerType, GameState, GameResult } from '../../domain/game.data';
+import { GamesHistoryService } from '../../services/games.history.service';
 
 @Component({
     selector: 'home',
@@ -17,7 +18,7 @@ export class GameComponent {
 
     sheetItems: number[] = [1, 2, 3];
 
-    constructor(private _cdRef: ChangeDetectorRef) { }
+    constructor(private _cdRef: ChangeDetectorRef, private historyService: GamesHistoryService) { }
 
     get gameResultsMap(): any {
         return { 'Xwin': `${this.playerXname} win!`, 'Draw': 'Draw!', 'Owin': `${this.playerOname} win!` };
@@ -56,8 +57,8 @@ export class GameComponent {
         } 
     }
 
-    gameOver(result: string) {
-        //TODO: pass result and time stamp to the history service
+    gameOver(xPlayerName: string, oPlayerName: string, result: string) {
+        this.historyService.saveGame(xPlayerName, oPlayerName, result);
     }
 
     initializeGame() {

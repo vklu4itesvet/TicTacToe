@@ -9,6 +9,7 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { GameComponent } from './components/gaming/game.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
+import { GamesHistoryService } from './services/games.history.service';
 
 @NgModule({
     declarations: [
@@ -29,7 +30,8 @@ import { CounterComponent } from './components/counter/counter.component';
             { path: 'fetch-data', component: FetchDataComponent },
             { path: '**', redirectTo: 'home' }
         ])
-    ]
+    ],
+    providers: [GamesHistoryService]
 })
 export class AppModuleShared {
 }

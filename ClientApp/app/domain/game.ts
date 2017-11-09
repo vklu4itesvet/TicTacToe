@@ -17,7 +17,7 @@ export class Game {
 
     oSteps = new Array<GameStep>();
 
-    onGameOver: (result: string) => void
+    onGameOver: (xPlayerName: string, oPlayerName: string, result: string) => void
 
     tryMakeStep(r: number, c: number) { 
         if (!this.stepIsAllowed(r, c)) {
@@ -25,7 +25,7 @@ export class Game {
         }
 
         if (this.checkIsOver(this.saveStep(r, c))) {
-            this.onGameOver(this.result ? this.result : '');
+            this.onGameOver(this.playerXname, this.playerOname, this.result ? this.result : '');
         }
         else {
             this.stepBy = this.stepBy * (-1);//switching current player
